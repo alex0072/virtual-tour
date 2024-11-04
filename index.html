@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Virtual Tours</title>
+    <style>
+        body {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #a1a1a1;
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 60px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #000000;
+            color: rgb(255, 255, 255);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* New header content styles */
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 75px;
+        }
+
+        .company-logo {
+            height: 80px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .company-name {
+            font-size: 5em;
+            margin-bottom: 2px;
+            display: inline-block;
+        }
+
+        .contact-info {
+            background-color: rgb(219, 129, 129);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+            cursor: pointer;
+            transform: transform 0.3s ease;
+            width: 80%;
+            max-width: 800px;
+        }
+        .contact-info:hover {
+            transform: translateY(10px);
+        }
+
+        .contact-info h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-details {
+            display: inline-block;
+            text-align: left;
+        }
+
+        .contact-item {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+
+        .contact-item i {
+            margin-right: 10px;
+            color: #4CAF50;
+            width: 20px;
+            text-align: center;
+        }
+
+        .contact-item a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: #4CAF50;
+        }
+
+        .tour-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px auto;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 80%;
+            max-width: 800px;
+    
+        }
+
+        .tour-container:hover {
+            transform: translateY(-10px);
+        }
+
+        .tour-button {
+            display: inline-block;
+            background-color: #b3e777;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 1.2em;
+            margin-top: 15px;
+        }
+
+        .tour-button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #4663c2;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+        }
+
+        footer .container {
+            padding: 0;
+        }
+
+        footer p {
+            margin: 0;
+            padding: 10px 0;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <!-- Add your logo image here -->
+                <img src="./assets/images/YNS-Logo-Header.png" alt="Company Logo" class="company-logo">
+                <div class="company-name">YOUR NEW SPACE</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="tour-container">
+            <h2>Virtual Property Tour</h2>
+            <p>Experience our interactive 360° virtual tour</p>
+            <a href="tour.html" class="tour-button">
+                <i class="fas fa-vr-cardboard"></i>
+                Start Virtual Tour
+            </a>
+        </div>
+    
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    Phone: <a href="tel:0824044023">082 404 4023</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    Email: <a href="mailto:alexhowden72@gmail.com">alexhowden72@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 YOUR NEW SPACE. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

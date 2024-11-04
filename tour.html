@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>360° Virtual Tour</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <style>
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+        }
+        
+        .loading-progress {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .watermark-logo {
+            position: fixed; /* Missing semicolon added */
+            top: 10px; /* Corrected colon placement */
+            left: 10px;
+            height: 150px;
+            width: auto;
+            opacity: 0.5;
+            z-index: 1000;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Watermarked Logo -->
+    <img src="assets/images/YNS-Logo-Watermark.png"
+     alt="Watermark Logo"
+    class="watermark-logo">
+
+    <!-- Add the Exit button here -->
+    <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+        <button onclick="window.location.href='../index.html'" 
+                style="padding: 10px 20px; 
+                       background: rgba(0,0,0,0.5); 
+                       color: white; 
+                       border: none; 
+                       cursor: pointer;">
+            Exit Tour
+        </button>
+    </div>
+    
+    <a-scene loading-screen="enabled: true; dotsColor: white; backgroundColor: black"
+             renderer="antialias: true; physicallyCorrectLights: true; sortObjects: true; maxCanvasHeight: 1920;">
+        <!-- Asset Management System -->
+            <a-assets timeout="30000">
+                <img id="front-door" src="./assets/images/front-door.JPG" crossorigin="anonymous">
+                <img id="kitchen" src="./assets/images/kitchen.JPG" crossorigin="anonymous">
+                <img id="lounge" src="./assets/images/lounge.JPG" crossorigin="anonymous">
+                <img id="space" src="./assets/images/space.JPG" crossorigin="anonymous">
+                <img id="bed1" src="./assets/images/bed1.JPG" crossorigin="anonymous">
+                <img id="bed2" src="./assets/images/bed2.JPG" crossorigin="anonymous">
+                <img id="bath" src="./assets/images/bath.JPG" crossorigin="anonymous">
+            </a-assets>
+     <script>
+        // Debug asset loading
+        window.addEventListener('load', function() {
+            const images = document.querySelectorAll('a-assets img');
+            images.forEach(img => {
+                console.log(`Checking image ${img.id}: ${img.src}`);
+                console.log(`Image loaded: ${img.complete}`);
+            });
+        });
+            
+        // Add error logging
+        document.querySelector('a-scene').addEventListener('loaded', function () {
+            console.log('Scene loaded');
+        });
+    </script>    
+
+        <!-- Scene 1 - Front Door -->
+        <a-entity id="scene1" visible="true">
+            <a-sky src="#front-door" rotation="0 -90 0"></a-sky>
+            
+            <!-- Arrow to Scene 2 -->
+            <a-entity rotation="0 -120 0">
+                <a-triangle
+                    position="0 1.4 -3"
+                    vertex-a="0 0.5 0"
+                    vertex-b="-0.5 -0.5 0"
+                    vertex-c="0.5 -0.5 0"
+                    rotation="0 0 0"
+                    scale="0.3 0.3 0.3"
+                    material="color: white; opacity: 0.9"
+                    onclick="switchScene('scene2')"
+                    class="clickable"
+                    animation="property: scale; to: 0.35 0.35 0.35; dur: 2000; dir: alternate; loop: true">
+                </a-triangle>
+            </a-entity>
+        </a-entity>
+
+        <!-- Scene 2 - Kitchen -->
+        <a-entity id="scene2" visible="false">
+            <a-sky src="#kitchen" rotation="0 -90 0"></a-sky>
+            
+            <!-- Arrow back to Scene 1 -->
+            <a-entity rotation="0 -20 0">
+                <a-triangle
+                    position="0 1.4 -3"
+                    vertex-a="0 0.5 0"
+                    vertex-b="-0.5 -0.5 0"
+                    vertex-c="0.5 -0.5 0"
+                    rotation="0 0 0"
+                    scale="0.3 0.3 0.3"
+                    material="color: white; opacity: 0.9"
+                    onclick="switchScene('scene1')"
+                    class="clickable"
+                    animation="property: scale; to: 0.35 0.35 0.35; dur: 2000; dir: alternate; loop: true">
+                </a-triangle>
+            </a-entity>
+
+            <!-- Arrow to Scene 3 -->
+            <a-entity rotation="0 -135 0">
+                <a-triangle
+                    position="0 1.4 -3"
+                    vertex-a="0 0.5 0"
+                    vertex-b="-0.5 -0.5 0"
+                    vertex-c="0.5 -0.5 0"
+                    rotation="0 0 0"
+                    scale="0.3 0.3 0.3"
+                    material="color: white; opacity: 0.9"
+                    onclick="switchScene('scene3')"
+                    class="clickable"
+                    animation="property: scale; to: 0.35 0.35 0.35; dur: 2000; dir: alternate; loop: true">
+                </a-triangle>
+            </a-entity>
+        </a-entity>
+        <!-- Scene 3 - Lounge -->
+        <a-entity id="scene3" visible="false">
+            <a-sky src="#lounge" rotation="0 -90 0"></a-sky>
+            
+            <!-- Arrow back to Scene 2 -->
+            <a-entity rotation="0 15 0">
+                <a-triangle
+                    position="0 1.4 -3"
+                    vertex-a="0 0.5 0"
+                    vertex-b="-0.5 -0.5 0"
+                    vertex-c="0.5 -0.5 0"
+                    rotation="0 0 0"
+                    scale="0.3 0.3 0.3"
+                    material="color: white; opacity: 0.9"
+                    onclick="switchScene('scene2')"
+                    class="clickable"
+                    animation="property: scale; to: 0.35 0.35 0.35; dur: 2000; dir: alternate; loop: true">
+                </a-triangle>
+            </a-entity>
+
+            <!-- Arrow to Scene 4 -->
+            <a-entity rotation="0 -80 0">
+                <a-triangle
+                    position="0 1.4 -3"
+                    vertex-a="0 0.5 0"
+                    vertex-b="-0.5 -0.5 0"
+                    vertex-c="0.5 -0.5 0"
+                    rotation="0 0 0"
+                    scale="0.3 0.3 0.3"
+                    material="color: white; opacity: 0.9"
+                    onclick="switchScene('scene4')"
+                    class="clickable"
+                    animation="property: scale; to: 0.35 0.35 0.35; dur: 2000; dir: alternate; loop: true">
+                </a-triangle>
+            </a-entity>
+        </a-entity>
+
+        <!-- Scene 4 - Space with multiple arrows -->
+        <a-entity id="scene4" visible="false">
+            <a-sky src="#space" rotation="0 -90 0"></a-sky>
+            
+            <!-- Arrow back to Scene 3 -->
+            <a-entity rotation="0 235 0">
+                <a-triangle
+                    position="0 1.4 -3"
+                    vertex-a="0 0.5 0"
+                    vertex-b="-0.5 -0.5 0"
+                    vertex-c="0.5 -0.5 0"
+                    rotation="0 0 0"
+                    scale="0.3 0.3 0.3"
+                    material="color: white; opacity: 0.9"
+                    onclick="switchScene('scene3')"
+                    class="clickable"
+                    animation="property: scale; to: 0.35 0.35 0.35; dur: 2000; dir: alternate; loop: true">
+                </a-triangle>
+            </a-entity>
+
+            <!-- Arrow to Scene 5 (right) -->
+            <a-entity rotation="0 -15 0">
+                <a-triangle
+                    position="0 1.4 -3"
+                    vertex-a="0 0.5 0"
+                    vertex-b="-0.5 -0.5 0"
+                    vertex-c="0.5 -0.5 0"
+                    rotation="0 0 0"
+                    scale="0.3 0.3 0.3"
+                    material="color: white; opacity: 0.9"
+                    onclick="switchScene('scene5')"
+                    class="clickable"
+                    animation="property: scale; to: 0.35 0.35 0.35; dur: 2000; dir: alternate; loop: true">
+                </a-triangle>
+            </a-entity>
+
+            <!-- Arrow to Scene 6 (straight ahead) -->
+            <a-entity rotation="0 60 0">
+                <a-triangle
+                    position="0 1.4 -3"
+                    vertex-a="0 0.5 0"
+                    vertex-b="-0.5 -0.5 0"
+                    vertex-c="0.5 -0.5 0"
+                    rotation="0 0 0"
+                    scale="0.3 0.3 0.3"
+                    material="color: white; opacity: 0.9"
+                    onclick="switchScene('scene6')"
+                    class="clickable"
+                    animation="property: scale; to: 0.35 0.35 0.35; dur: 2000; dir: alternate; loop: true">
+                </a-triangle>
+            </a-entity>
+
+            <!-- Arrow to Scene 7 (left) -->
+            <a-entity rotation="0 140 0">
+                <a-triangle
+                    position="0 1.4 -3"
+                    vertex-a="0 0.5 0"
+                    vertex-b="-0.5 -0.5 0"
+                    vertex-c="0.5 -0.5 0"
+                    rotation="0 0 0"
+                    scale="0.3 0.3 0.3"
+                    material="color: white; opacity: 0.9"
+                    onclick="switchScene('scene7')"
+                    class="clickable"
+                    animation="property: scale; to: 0.35 0.35 0.35; dur: 2000; dir: alternate; loop: true">
+                </a-triangle>
+            </a-entity>
+        </a-entity>
+        <!-- Scene 5 - Bedroom 1 -->
+        <a-entity id="scene5" visible="false">
+            <a-sky src="#bed1" rotation="0 -90 0"></a-sky>
+
+            <!-- Arrow back to Scene 4 -->
+            <a-entity rotation="0 65 0">
+                <a-triangle
+                    position="0 1.4 -3"
+                    vertex-a="0 0.5 0"
+                    vertex-b="-0.5 -0.5 0"
+                    vertex-c="0.5 -0.5 0"
+                    rotation="0 0 0"
+                    scale="0.3 0.3 0.3"
+                    material="color: white; opacity: 0.9"
+                    onclick="switchScene('scene4')"
+                    class="clickable"
+                    animation="property: scale; to: 0.35 0.35 0.35; dur: 2000; dir: alternate; loop: true">
+                </a-triangle>
+            </a-entity>
+        </a-entity>
+
+        <!-- Scene 6 - Bedroom 2 -->
+        <a-entity id="scene6" visible="false">
+            <a-sky src="#bed2" rotation="0 -90 0"></a-sky>
+
+            <!-- Arrow back to Scene 4 -->
+            <a-entity rotation="0 -150 0">
+                <a-triangle
+                    position="0 1.4 -3"
+                    vertex-a="0 0.5 0"
+                    vertex-b="-0.5 -0.5 0"
+                    vertex-c="0.5 -0.5 0"
+                    rotation="0 0 0"
+                    scale="0.3 0.3 0.3"
+                    material="color: white; opacity: 0.9"
+                    onclick="switchScene('scene4')"
+                    class="clickable"
+                    animation="property: scale; to: 0.35 0.35 0.35; dur: 2000; dir: alternate; loop: true">
+                </a-triangle>
+            </a-entity>
+        </a-entity>
+
+        <!-- Scene 7 - Bathroom -->
+        <a-entity id="scene7" visible="false">
+            <a-sky src="#bath" rotation="0 -90 0"></a-sky>
+
+            <!-- Arrow back to Scene 4 -->
+            <a-entity rotation="0 -165 0">
+                <a-triangle
+                    position="0 1.4 -3"
+                    vertex-a="0 0.5 0"
+                    vertex-b="-0.5 -0.5 0"
+                    vertex-c="0.5 -0.5 0"
+                    rotation="0 0 0"
+                    scale="0.3 0.3 0.3"
+                    material="color: white; opacity: 0.9"
+                    onclick="switchScene('scene4')"
+                    class="clickable"
+                    animation="property: scale; to: 0.35 0.35 0.35; dur: 2000; dir: alternate; loop: true">
+                </a-triangle>
+            </a-entity>
+        </a-entity>
+
+        <!-- Camera and Controls -->
+        <a-camera look-controls>
+            <a-cursor
+                id="cursor"
+                color="white"
+                scale="1 1 1"
+                animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+                animation__fusing="property: scale; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+                animation__mouseleave="property: scale; startEvents: mouseleave; to: 1 1 1; dur: 500"
+                raycaster="objects: .clickable"
+                position="0 0 -1"
+                geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+                material="color: white; shader: flat">
+            </a-cursor>
+
+    </a-entity>
+
+        </a-camera>
+    </a-scene>
+    <script>
+        let isLoading = false;
+        let loadingEl = null;
+
+        function exitTour(){
+            console.log('exiting tour...');
+            window.location.herf='../index.html';
+        }
+
+        // Create loading indicator
+        function showLoading() {
+            loadingEl = document.createElement('div');
+            loadingEl.className = 'loading';
+            loadingEl.innerHTML = 'Loading Scene...';
+            document.body.appendChild(loadingEl);
+        }
+
+        function hideLoading() {
+            if (loadingEl && loadingEl.parentNode) {
+                loadingEl.parentNode.removeChild(loadingEl);
+            }
+            isLoading = false;
+        }
+
+        function switchScene(sceneName) {
+            if (isLoading) return; // Prevent multiple clicks while loading
+            isLoading = true;
+           
+            // Show loading indicator
+            showLoading();
+
+            console.log('Switching to:', sceneName);
+            
+            // Get all scenes
+            const scenes = ['scene1', 'scene2', 'scene3', 'scene4', 'scene5', 'scene6', 'scene7'];
+            
+            // Hide all scenes first
+            scenes.forEach(scene => {
+                const sceneEl = document.getElementById(scene);
+                if (sceneEl) {
+                    sceneEl.setAttribute('visible', false);
+                }
+            });
+
+            // Show the selected scene immediatly
+            const targetScene = document.getElementById(sceneName);
+            if (targetScene) {
+                targetScene.setAttribute('visible', true);
+                // Hide Loading screen immediatly after scene is visible
+                hideLoading();
+            }
+        }
+        // Initialize scene
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show initial loading screen
+            showLoading();
+
+            // Add event listeners after scene loads
+            document.querySelector('a-scene').addEventListener('loaded', function () {
+                console.log('Scene loaded');
+                hideLoading();
+                
+                // Make sure all clickable elements are working
+                document.querySelectorAll('.clickable').forEach(element => {
+                    element.addEventListener('click', function (evt) {
+                        console.log('Click detected');
+                    });
+                });
+            });
+
+            // Error handling for images
+            document.querySelectorAll('a-sky').forEach(sky => {
+                sky.addEventListener('error', function(evt) {
+                    console.error('Error loading image:', sky.getAttribute('src'));
+                    alert('Error loading scene. Please try again.');
+                    hideLoading();
+                });
+            });
+
+            // Asset loading tracking
+            let assetsLoaded = 0;
+            const totalAssets = document.querySelectorAll('a-assets img').length;
+
+            document.querySelectorAll('a-assets img').forEach(img => {
+                img.addEventListener('load', function() {
+                    assetsLoaded++;
+                    if (loadingEl) {
+                        loadingEl.innerHTML = `Loading... ${Math.floor((assetsLoaded/totalAssets) * 100)}%`;
+                    }
+                    if (assetsLoaded === totalAssets) {
+                        console.log('All assets loaded successfully');
+                    }
+                });
+
+                img.addEventListener('error', function(evt) {
+                    console.error('Error loading image:', img.src);
+                    alert('Error loading tour assets. Please refresh the page.');
+                });
+            });
+        });
+            function goToLandingPage() {
+        window.location.href = 'index.html'; // Replace with your landing page filename
+    }
+
+        // Handle browser back button
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.scene) {
+                switchScene(event.state.scene);
+            }
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            switch(event.key) {
+                case 'Escape':
+                    switchScene('scene1'); // Home
+                    break;
+                case 'ArrowLeft':
+                    // Handle left navigation
+                    break;
+                case 'ArrowRight':
+                    // Handle right navigation
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>
